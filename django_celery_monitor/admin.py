@@ -1,8 +1,6 @@
 """Result Task Admin interface."""
 from __future__ import absolute_import, unicode_literals
 
-from __future__ import absolute_import, unicode_literals
-
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.admin.views import main as main_views
