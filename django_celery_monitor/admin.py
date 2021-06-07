@@ -7,7 +7,7 @@ from django.contrib.admin.views import main as main_views
 from django.shortcuts import render
 from django.utils.encoding import force_text
 from django.utils.html import format_html, escape, mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from celery import current_app
 from celery import states
