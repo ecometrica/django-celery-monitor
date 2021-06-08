@@ -43,20 +43,7 @@ class ExtendedQuerySet(models.QuerySet):
                 obj.save(using=self.db)
             return obj, False
 
-        with transaction.atomic(using=self.db):
-            try:
-                obj = self.select_for_update().get(**kwargs)
-            except self.model.DoesNotExist:
-                params = self._extract_model_params(defaults, **kwargs)
-                # Lock the row so that a concurrent update is blocked until
-                # after update_or_create() has performed its save.
-                obj, created = self._create_object_from_params(kwargs, params, lock=True)
-                if created:
-                    return obj, created
-            for k, v in defaults.items():
-                setattr(obj, k, v() if callable(v) else v)
-            obj.save(using=self.db)
-        return obj, False
+        return self.update_or_create(defaults, **kwargs)
 
 
 class WorkerStateQuerySet(ExtendedQuerySet):
