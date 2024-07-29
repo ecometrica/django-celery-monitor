@@ -7,7 +7,6 @@ import sys
 import codecs
 
 import setuptools
-import setuptools.command.test
 
 try:
     import platform
@@ -121,11 +120,10 @@ else:
 # -*- %%% -*-
 
 
-class pytest(setuptools.command.test.test):
+class pytest():
     user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
 
     def initialize_options(self):
-        setuptools.command.test.test.initialize_options(self)
         self.pytest_args = []
 
     def run_tests(self):
@@ -147,8 +145,6 @@ setuptools.setup(
     license='BSD',
     classifiers=classifiers,
     install_requires=reqs('default.txt'),
-    tests_require=reqs('test.txt'),
-    cmdclass={'test': pytest},
     zip_safe=False,
     include_package_data=True,
 )
